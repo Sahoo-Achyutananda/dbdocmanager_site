@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'; // Or a different style
 import { 
   Database, 
   ArrowRight, 
@@ -220,7 +222,10 @@ const CodeSnippet = ({ code, label }) => (
       </div>
     </div>
     <div className="p-6 overflow-x-auto">
-      <pre>{code}</pre>
+      {/* <pre>{code}</pre> */}
+      <SyntaxHighlighter language="json" style={dracula} showLineNumbers wrapLongLines>
+        {code.trim()}
+      </SyntaxHighlighter>
     </div>
   </div>
 );
@@ -234,8 +239,8 @@ const DSLGuide = () => {
     { id: 'mappings', label: 'Mappings (Lineage)', icon: Activity },
   ];
 
-  const codeExamples = {
-    targets: `{
+const codeExamples = {
+  targets: `{
   "targets": [
     {
       "db": "dw",
@@ -254,7 +259,8 @@ const DSLGuide = () => {
     }
   ]
 }`,
-    sources: `{
+
+  sources: `{
   "sources": [
     {
       "id": "mongo_users",
@@ -266,7 +272,8 @@ const DSLGuide = () => {
     }
   ]
 }`,
-    mappings: `{
+
+  mappings: `{
   "mappings": [
     {
       "target": "dw.mart.dim_user.email",
@@ -284,8 +291,9 @@ const DSLGuide = () => {
       }
     }
   ]
-}`,
-  };
+}`
+};
+
 
   return (
     <section id="dsl" className="py-24 bg-white">
@@ -335,12 +343,12 @@ const DSLGuide = () => {
                 code={codeExamples[activeTab]} 
                 label={`project_schema_${activeTab}.json`} 
               />
-              <div className="mt-4 p-4 bg-blue-50 border border-blue-100 rounded-lg text-blue-800 text-sm flex gap-3 items-start">
+              {/* <div className="mt-4 p-4 bg-blue-50 border border-blue-100 rounded-lg text-blue-800 text-sm flex gap-3 items-start">
                 <div className="mt-0.5"><Code size={16} /></div>
                 <p>
                   <strong>Pro Tip:</strong> You can split these definitions into multiple files. The parser automatically merges all <code>.json</code> files in your repository.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -362,7 +370,9 @@ const FullExample = () => (
                 <div>
                     <h3 className="text-xl font-bold mb-4 text-purple-400">Input (JSON DSL)</h3>
                     <div className="bg-[#0B1120] border border-slate-700 rounded-xl p-6 font-mono text-xs leading-relaxed text-slate-300 shadow-2xl overflow-auto max-h-[500px]">
-{`{
+{
+<SyntaxHighlighter showLineNumbers wrapLongLines style={dracula}>
+  {`{
   "project": "retail_dw",
   "owners": ["data-eng@company.com"],
   "targets": [
@@ -408,6 +418,8 @@ const FullExample = () => (
     }
   ]
 }`}
+</SyntaxHighlighter>
+}
                     </div>
                 </div>
 
