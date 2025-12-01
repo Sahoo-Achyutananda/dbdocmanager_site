@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Play, CheckCircle, ArrowRight, Menu, X, Database, Layout, GitBranch, ChevronDown } from 'lucide-react';
 
@@ -19,11 +18,9 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-50 px-6 py-6">
+    <nav className="absolute top-0 left-0 w-full z-50 px-6 py-6 ">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <div className="flex items-center gap-2 cursor-pointer">
-           {/* Icon imitating the dots in the logo */}
            <div className="flex gap-0.5">
              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
@@ -33,13 +30,12 @@ export function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-          <a href="#" className="hover:text-gray-900 transition-colors">Home</a>
-          <a href="#" className="hover:text-gray-900 transition-colors">Features</a>
-          <a href="#" className="hover:text-gray-900 transition-colors">Pricing</a>
-          <div className="flex items-center gap-1 hover:text-gray-900 transition-colors cursor-pointer">
-            <span>Pages</span>
-            <ChevronDown size={14} />
-          </div>
+          <a href="/" className="hover:text-gray-900 transition-colors">Home</a>
+          <a href="/features" className="hover:text-gray-900 transition-colors">Features</a>
+          <a href="/docs" className="hover:text-gray-900 transition-colors">Docs</a>
+          <a href="/dsl" className="hover:text-gray-900 transition-colors">DSL</a>
+          <a href="/editor" className="hover:text-gray-900 transition-colors">DSL Editor</a>
+          
         </div>
 
         {/* CTA Button */}
