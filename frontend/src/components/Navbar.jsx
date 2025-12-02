@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Play, CheckCircle, ArrowRight, Menu, X, Database, Layout, GitBranch, ChevronDown } from 'lucide-react';
 
