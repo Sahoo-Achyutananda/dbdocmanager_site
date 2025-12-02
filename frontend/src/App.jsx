@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Download from './pages/Download'
-import LiveEditor from './pages/LiveEditor'
+import LiveEditor from './pages/LiveEditor.jsx'
 import Dsl from './pages/Dsl'
 import Documentation from './pages/Documentation'
 
