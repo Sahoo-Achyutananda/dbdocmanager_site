@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Play, CheckCircle, ArrowRight, Menu, X, Database, Layout, GitBranch, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, CheckCircle, Layout, Database, GitBranch, Copy, Check } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
-// Placeholder for the dashboard image if the user doesn't have one, 
-// effectively mocking the look in the photo.
+
+// Placeholder for the dashboard image
 const DashboardMockup = () => (
   <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden w-full">
     {/* Fake Browser Header */}
@@ -49,63 +49,16 @@ const DashboardMockup = () => (
   </div>
 );
 
-// const Navbar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   return (
-//     <nav className="absolute top-0 left-0 w-full z-50 px-6 py-6">
-//       <div className="max-w-7xl mx-auto flex items-center justify-between">
-//         {/* Logo */}
-//         <div className="flex items-center gap-2 cursor-pointer">
-//            {/* Icon imitating the dots in the logo */}
-//            <div className="flex gap-0.5">
-//              <div className="w-2 h-2 rounded-full bg-purple-600"></div>
-//              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-//            </div>
-//            <span className="text-xl font-bold text-gray-900 tracking-tight">DBDocManager</span>
-//         </div>
-
-//         {/* Desktop Links */}
-//         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-//           <a href="#" className="hover:text-gray-900 transition-colors">Home</a>
-//           <a href="#" className="hover:text-gray-900 transition-colors">Features</a>
-//           <a href="#" className="hover:text-gray-900 transition-colors">Pricing</a>
-//           <div className="flex items-center gap-1 hover:text-gray-900 transition-colors cursor-pointer">
-//             <span>Pages</span>
-//             <ChevronDown size={14} />
-//           </div>
-//         </div>
-
-//         {/* CTA Button */}
-//         <div className="hidden md:block">
-//           <a 
-//             href="/download" 
-//             className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
-//           >
-//             Get Started <ArrowRight size={16} />
-//           </a>
-//         </div>
-
-//         {/* Mobile Menu Button */}
-//         <button className="md:hidden text-gray-600" onClick={() => setIsOpen(!isOpen)}>
-//           {isOpen ? <X /> : <Menu />}
-//         </button>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       {isOpen && (
-//         <div className="absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-4 md:hidden">
-//           <a href="#" className="text-gray-600 font-medium">Home</a>
-//           <a href="#" className="text-gray-600 font-medium">Features</a>
-//           <a href="#" className="text-gray-600 font-medium">Pricing</a>
-//           <a href="/download" className="bg-gray-900 text-white px-4 py-2 rounded-full text-center text-sm font-medium">Get Started</a>
-//         </div>
-//       )}
-//     </nav>
-//   );
-// };
-
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const installCommand = "npm install -g dbdocmanager_ssd";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(installCommand);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden">
       
@@ -114,7 +67,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6">
         
-        {/* The "Glow" Background Effect from the photo */}
+        {/* The "Glow" Background Effect */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] -z-10">
           <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-[96px] opacity-70 animate-blob"></div>
           <div className="absolute top-20 right-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-[96px] opacity-70 animate-blob animation-delay-2000"></div>
@@ -124,7 +77,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.1]">
             Your Committed Partner in <br className="hidden md:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-purple-700 to-pink-600">
               Data Documentation
             </span>
           </h1>
@@ -134,13 +87,32 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <button className="w-full sm:w-auto bg-gray-900 text-white px-8 py-4 rounded-full font-medium hover:bg-black transition-all hover:scale-105 shadow-xl shadow-purple-900/10 flex items-center justify-center gap-2 group">
-              Get Started 
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-            </button>
-            <button className="w-full sm:w-auto bg-white text-gray-700 border border-gray-200 px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all hover:border-gray-300 flex items-center justify-center gap-2">
+            
+            {/* NPM Install Button - Matches Purple Vibe */}
+            <div 
+              className="group relative flex items-center bg-[#1e1b4b] hover:bg-[#2e1065] text-white rounded-full p-1 pr-6 shadow-xl shadow-purple-900/20 hover:shadow-purple-900/40 hover:scale-105 transition-all cursor-pointer border border-purple-900/50" 
+              onClick={handleCopy}
+            >
+              <div className="bg-[#4c1d95] rounded-full p-3 mr-3 group-hover:bg-[#5b21b6] transition-colors">
+                <span className="font-mono text-sm text-purple-100 font-bold">&gt;_</span>
+              </div>
+              <code className="font-mono text-sm mr-4 text-purple-50">{installCommand}</code>
+              {copied ? (
+                <Check size={18} className="text-green-400" />
+              ) : (
+                <Copy size={18} className="text-purple-300 group-hover:text-white transition-colors" />
+              )}
+            </div>
+
+            {/* Learn More Button - Matches Purple Vibe */}
+            <a 
+              href="https://www.npmjs.com/package/dbdocmanager_ssd" 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-full sm:w-auto bg-white text-purple-700 border border-purple-200 px-8 py-4 rounded-full font-medium hover:bg-purple-50 hover:border-purple-300 hover:text-purple-900 transition-all hover:scale-105 shadow-sm hover:shadow-md flex items-center justify-center gap-2"
+            >
               Learn More
-            </button>
+            </a>
           </div>
 
           {/* Dashboard Image / Mockup */}
@@ -151,8 +123,8 @@ export default function Home() {
             
             {/* Floating badge decoration */}
             <div className="hidden md:flex absolute -right-12 top-20 bg-white p-3 rounded-xl shadow-xl border border-gray-100 items-center gap-3 animate-bounce-slow">
-               <div className="bg-green-100 p-2 rounded-lg">
-                 <CheckCircle size={20} className="text-green-600" />
+               <div className="bg-purple-100 p-2 rounded-lg">
+                 <CheckCircle size={20} className="text-purple-600" />
                </div>
                <div>
                  <div className="text-xs text-gray-400 font-semibold uppercase">Status</div>
@@ -189,8 +161,8 @@ export default function Home() {
                 desc: "Track column-level lineage from source to target to understand data flow and dependencies."
               }
             ].map((feature, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="mb-6 bg-gray-50 w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-purple-100 hover:-translate-y-1 transition-all duration-300 group">
+                <div className="mb-6 bg-gray-50 w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-purple-50">
                   {feature.icon}
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h4>
@@ -204,7 +176,7 @@ export default function Home() {
       {/* VIDEO SECTION */}
       <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-gray-900 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+          <div className="bg-[#1e1b4b] rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
             {/* Abstract shapes in background of video section */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px]"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-pink-600/20 rounded-full blur-[80px]"></div>
@@ -214,21 +186,17 @@ export default function Home() {
                 See DBDocManager in Action
               </h3>
               
-              <div className="relative aspect-video bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-2xl group cursor-pointer">
-                {/* Placeholder for video thumbnail */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center">
-                   <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center pl-1 shadow-lg">
-                        <Play className="text-purple-600 fill-purple-600" size={24} />
-                      </div>
-                   </div>
-                </div>
-                {/* Actual video element would go here */}
-                <img 
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop" 
-                  alt="Video Thumbnail" 
-                  className="w-full h-full object-cover opacity-80"
-                />
+              <div className="relative aspect-video bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-2xl">
+                {/* YouTube Video Embed */}
+                <iframe 
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/g6TleEwgoQQ" 
+                  title="DBDocManager Demo"
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
